@@ -220,6 +220,10 @@ if(CMAKE_COMPILER_IS_MSVC)
     string(APPEND CMAKE_C_FLAGS " /FS")
     string(APPEND CMAKE_CXX_FLAGS " /FS")
   endif()
+
+  if(MSVC_VERSION GREATER_EQUAL 1914)
+    string(APPEND CMAKE_CXX_FLAGS " /Zc:__cplusplus")
+  endif()
 endif()
 
 if(CMAKE_COMPILER_IS_PATHSCALE)

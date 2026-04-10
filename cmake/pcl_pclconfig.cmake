@@ -15,6 +15,11 @@ set(PCLCONFIG_OPTIONAL_DEPENDENCIES)
 set(PCLCONFIG_SSE_DEFINITIONS "${SSE_DEFINITIONS}")
 set(PCLCONFIG_SSE_COMPILE_OPTIONS ${SSE_FLAGS})
 set(PCLCONFIG_AVX_COMPILE_OPTIONS ${AVX_FLAGS})
+set(PCLCONFIG_COMPILE_OPTIONS)
+
+if(MSVC AND MSVC_VERSION GREATER_EQUAL 1914)
+  list(APPEND PCLCONFIG_COMPILE_OPTIONS "/Zc:__cplusplus")
+endif()
 
 # Eigen has a custom mechanism to guarantee aligned memory (used for everything older than C++17, see Memory.h in the Eigen project)
 # If PCL is compiled with C++14 and the user project is compiled with C++17, this will lead to problems (e.g. memory allocated with the custom mechanism but freed without it)
